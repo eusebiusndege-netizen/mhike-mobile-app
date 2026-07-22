@@ -1,28 +1,37 @@
-Overview
-A web-based application developed to digitize the management of Kenyan Chamas by allowing administrators and members to manage contributions, loans, repayments, and member records.
+# MHike Mobile App
 
-Features
-User authentication
-Role-based access
-Member management
-Loan management
-Contribution tracking
-Notifications
-Dashboard
-Reports
+## Overview
 
+MHike is a cross-platform mobile application developed using .NET MAUI for managing hiking routes, recording hikes, and documenting observations. The application demonstrates mobile application development concepts including navigation, data persistence, and user-friendly interfaces.
 
-Technologies
-Node.js
-Express.js
-MySQL
-HTML
-CSS
-JavaScript
+## Features
 
+- Add hiking routes
+- Edit and delete hikes
+- Record hike observations
+- Local data storage
+- Cross-platform support
 
-Future Improvements
-M-Pesa integration
-Email notifications
-Analytics Dashboard
+## Technologies Used
 
+- .NET MAUI
+- C#
+- SQLite
+- Visual Studio
+
+## Installation
+
+1. Clone the repository.
+2. Open the solution in Visual Studio.
+3. Restore NuGet packages.
+4. Build and run the application.
+
+## Future Improvements
+
+- Cloud synchronization
+- GPS integration
+- Photo uploads
+
+## Author
+
+Eusebius Ndege
