@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MHike.Pages.AddEditHikePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding PageTitle}">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+
+            <!-- Header -->
+            <StackLayout HorizontalOptions="Center" Spacing="10">
+                <Label Text="{Binding PageTitle}"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#4CAF50" />
+                <Label Text="Record your hiking adventure"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       TextColor="#666" />
+            </StackLayout>
+
+            <!-- Form Container -->
+            <Border BackgroundColor="White" 
+                   Padding="20" 
+                   Stroke="LightGray"
+                   StrokeThickness="1"
+                   StrokeShape="RoundRectangle 12">
+                <StackLayout Spacing="15">
+
+                    <!-- Name -->
+                    <StackLayout>
+                        <Label Text="Hike Name *" FontAttributes="Bold"/>
+                        <Entry Text="{Binding Name}" 
+                               Placeholder="Enter hike name"
+                               BackgroundColor="#F5F5F5"
+                               HeightRequest="50"/>
+                        <Label Text="{Binding NameError}" 
+                               TextColor="Red" 
+                               IsVisible="{Binding HasNameError}"
+                               FontSize="12"/>
+                    </StackLayout>
+
+                    <!-- Location -->
+                    <StackLayout>
+                        <Label Text="Location *" FontAttributes="Bold"/>
+                        <Entry Text="{Binding Location}" 
+                               Placeholder="Enter location"
+                               BackgroundColor="#F5F5F5"
+                               HeightRequest="50"/>
+                        <Label Text="{Binding LocationError}" 
+                               TextColor="Red" 
+                               IsVisible="{Binding HasLocationError}"
+                               FontSize="12"/>
+                    </StackLayout>
+
+                    <!-- Two Column Grid for Date and Parking -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+
+                        <!-- Date -->
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Date *" FontAttributes="Bold"/>
+                            <DatePicker Date="{Binding Date}"
+                                        BackgroundColor="#F5F5F5"
+                                        HeightRequest="50"/>
+                        </StackLayout>
+
+                        <!-- Parking Available -->
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Parking Available *" FontAttributes="Bold"/>
+                            <Picker Title="Select..."
+                                    ItemsSource="{Binding ParkingOptions}"
+                                    SelectedItem="{Binding SelectedParking}"
+                                    BackgroundColor="#F5F5F5"
+                                    HeightRequest="50"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <!-- Two Column Grid for Length and Difficulty -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+
+                        <!-- Length -->
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Length *" FontAttributes="Bold"/>
+                            <Picker Title="Select..."
+                                    ItemsSource="{Binding LengthOptions}"
+                                    SelectedItem="{Binding SelectedLength}"
+                                    BackgroundColor="#F5F5F5"
+                                    HeightRequest="50"/>
+                        </StackLayout>
+
+                        <!-- Level of Difficulty -->
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Difficulty Level *" FontAttributes="Bold"/>
+                            <Picker Title="Select..."
+                                    ItemsSource="{Binding LevelOptions}"
+                                    SelectedItem="{Binding SelectedLevel}"
+                                    BackgroundColor="#F5F5F5"
+                                    HeightRequest="50"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <!-- Two Column Grid for Custom Fields -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+
+                        <!-- Estimated Time -->
+                        <StackLayout Grid.Column="0">
+                            <Label Text="Estimated Time" FontAttributes="Bold"/>
+                            <Entry Text="{Binding EstimatedTime}" 
+                                   Placeholder="e.g., 2-3 hours"
+                                   BackgroundColor="#F5F5F5"
+                                   HeightRequest="50"/>
+                        </StackLayout>
+
+                        <!-- Weather Conditions -->
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Expected Weather" FontAttributes="Bold"/>
+                            <Picker Title="Select..."
+                                    ItemsSource="{Binding WeatherOptions}"
+                                    SelectedItem="{Binding SelectedWeather}"
+                                    BackgroundColor="#F5F5F5"
+                                    HeightRequest="50"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <!-- Description -->
+                    <StackLayout>
+                        <Label Text="Description" FontAttributes="Bold"/>
+                        <Editor Text="{Binding Description}"
+                                Placeholder="Enter hike description, notes, or highlights..."
+                                BackgroundColor="#F5F5F5"
+                                HeightRequest="100"
+                                AutoSize="TextChanges"/>
+                    </StackLayout>
+
+                </StackLayout>
+            </Border>
+
+            <!-- Buttons -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                <Button Grid.Column="0"
+                        Text="Cancel"
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="#9E9E9E"
+                        TextColor="White"
+                        HeightRequest="50"
+                        CornerRadius="25"/>
+                <Button Grid.Column="1"
+                        Text="Save Hike"
+                        Command="{Binding SaveHikeCommand}"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        HeightRequest="50"
+                        CornerRadius="25"/>
+            </Grid>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

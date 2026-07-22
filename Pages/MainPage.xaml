@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MHike.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MHike"
+             Title="MHike - My Hikes">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Header -->
+        <Border Grid.Row="0" 
+               BackgroundColor="#4CAF50" 
+               Padding="20,40,20,20" 
+               StrokeThickness="0">
+            <StackLayout>
+                <Label Text="My Hikes"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+                <Label Text="{Binding Hikes.Count, StringFormat='{0} hikes recorded'}"
+                       FontSize="14"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </Border>
+
+        <!-- Hikes List -->
+        <RefreshView Grid.Row="1" 
+                     Command="{Binding LoadHikesCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Hikes}"
+                            EmptyView="No hikes yet. Add your first hike to get started!">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="15,8" 
+                               Padding="15" 
+                               BackgroundColor="White"
+                               Stroke="LightGray"
+                               StrokeThickness="1"
+                               StrokeShape="RoundRectangle 12">
+                            <Grid ColumnDefinitions="*,Auto" 
+                                  RowDefinitions="Auto,Auto,Auto,Auto"
+                                  RowSpacing="5">
+
+                                <!-- Hike Name -->
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding Name}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#333" />
+
+                                <!-- Location -->
+                                <StackLayout Grid.Row="1" Grid.Column="0" 
+                                             Orientation="Horizontal" 
+                                             Spacing="5">
+                                    <Label Text="Location:" FontSize="12" TextColor="#666"/>
+                                    <Label Text="{Binding Location}"
+                                           FontSize="14"
+                                           TextColor="#666" />
+                                </StackLayout>
+
+                                <!-- Date & Difficulty -->
+                                <StackLayout Grid.Row="2" Grid.Column="0" 
+                                             Orientation="Horizontal" 
+                                             Spacing="15">
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Label Text="Date:" FontSize="12" TextColor="#666"/>
+                                        <Label Text="{Binding Date, StringFormat='{0:MMM dd, yyyy}'}"
+                                               FontSize="12"
+                                               TextColor="#666" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Label Text="Difficulty:" FontSize="12" TextColor="#666"/>
+                                        <Label Text="{Binding Level}"
+                                               FontSize="12"
+                                               TextColor="#666" />
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <!-- Length & Parking -->
+                                <StackLayout Grid.Row="3" Grid.Column="0" 
+                                             Orientation="Horizontal" 
+                                             Spacing="15">
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Label Text="Length:" FontSize="12" TextColor="#666"/>
+                                        <Label Text="{Binding Length}"
+                                               FontSize="12"
+                                               TextColor="#666" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="5">
+                                        <Label Text="Parking:" FontSize="12" TextColor="#666"/>
+                                        <Label Text="{Binding ParkingAvailable, StringFormat='{0}'}"
+                                               FontSize="12"
+                                               TextColor="#666" />
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <!-- Action Buttons -->
+                                <StackLayout Grid.Row="0" Grid.RowSpan="4" Grid.Column="1"
+                                             Spacing="5"
+                                             VerticalOptions="Center">
+
+                                    <!-- Observations Button -->
+                                    <Button Text="View"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ViewObservationsCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#E3F2FD"
+                                            TextColor="#1976D2"
+                                            WidthRequest="50"
+                                            HeightRequest="35"
+                                            CornerRadius="8"
+                                            FontSize="10"/>
+
+                                    <!-- Edit Button -->
+                                    <Button Text="Edit"
+                                            Clicked="OnEditHikeClicked"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#FFF3E0"
+                                            TextColor="#FF9800"
+                                            WidthRequest="50"
+                                            HeightRequest="35"
+                                            CornerRadius="8"
+                                            FontSize="10"/>
+
+                                    <!-- Delete Button -->
+                                    <Button Text="Delete"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.DeleteHikeCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#FFEBEE"
+                                            TextColor="#F44336"
+                                            WidthRequest="50"
+                                            HeightRequest="35"
+                                            CornerRadius="8"
+                                            FontSize="10"/>
+                                </StackLayout>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Add Hike Button -->
+        <Border Grid.Row="2" 
+               BackgroundColor="White" 
+               Padding="20,10" 
+               StrokeThickness="0">
+            <Button Text="+ Add New Hike"
+                    Clicked="OnAddHikeClicked"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    FontSize="16"
+                    HeightRequest="50"
+                    CornerRadius="25" />
+        </Border>
+
+    </Grid>
+</ContentPage>

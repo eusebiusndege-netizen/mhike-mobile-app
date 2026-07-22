@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MHike.Pages.ObservationsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Observations">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <!-- Header -->
+        <Border Grid.Row="0" Padding="20" BackgroundColor="#512BD4" StrokeThickness="0">
+            <StackLayout>
+                <Label Text="{Binding HikeName}"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+                <Label Text="Observations"
+                       FontSize="16"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </Border>
+
+        <!-- Observations List -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Observations}"
+                        Margin="20">
+            <CollectionView.EmptyView>
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="40">
+                    <Label Text="No observations yet."
+                           FontSize="16"
+                           HorizontalOptions="Center" />
+                    <Label Text="Tap the button below to add your first observation."
+                           FontSize="14"
+                           TextColor="Gray"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="15,10" 
+                           BackgroundColor="White"
+                           Stroke="LightGray"
+                           StrokeThickness="1"
+                           StrokeShape="RoundRectangle 8"
+                           Margin="0,5">
+                        <Grid ColumnDefinitions="*, Auto, Auto"
+                              RowDefinitions="Auto, Auto, Auto">
+
+                            <Label Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Title}"
+                                   FontSize="16"
+                                   FontAttributes="Bold" />
+
+                            <Label Grid.Row="1" Grid.Column="0"
+                                   Text="{Binding Date, StringFormat='{0:MMM dd, yyyy hh:mm tt}'}"
+                                   FontSize="12"
+                                   TextColor="Gray" />
+
+                            <Label Grid.Row="2" Grid.Column="0"
+                                   Text="{Binding Comment}"
+                                   FontSize="14"
+                                   MaxLines="2"
+                                   LineBreakMode="TailTruncation" />
+
+                            <!-- Edit Button -->
+                            <Button Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
+                                    Text="Edit"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ObservationsPage}}, Path=BindingContext.EditObservationCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#DFD8F7"
+                                    TextColor="Black"
+                                    Margin="5,0"
+                                    WidthRequest="60" />
+
+                            <!-- Delete Button -->
+                            <Button Grid.Row="0" Grid.RowSpan="3" Grid.Column="2"
+                                    Text="Delete"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:ObservationsPage}}, Path=BindingContext.DeleteObservationCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Red"
+                                    TextColor="White"
+                                    WidthRequest="70" />
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Add Observation Button -->
+        <Border Grid.Row="2" StrokeThickness="0">
+            <Button Text="Add Observation"
+                    Command="{Binding AddObservationCommand}"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    Margin="20,10"
+                    HeightRequest="50" />
+        </Border>
+
+    </Grid>
+</ContentPage>

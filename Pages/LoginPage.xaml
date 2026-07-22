@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MHike.Pages.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="MHike - Login">
+
+	<ScrollView>
+		<StackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+			<!-- Header -->
+			<StackLayout HorizontalOptions="Center" Spacing="10">
+				<Label Text="MHike"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#4CAF50"/>
+				<Label Text="Your Hiking Companion"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="#666"/>
+			</StackLayout>
+
+			<!-- Login Form -->
+			<Border BackgroundColor="White"
+                   Padding="20"
+                   Stroke="LightGray"
+                   StrokeThickness="1"
+                   StrokeShape="RoundRectangle 10">
+				<StackLayout Spacing="15">
+					<Label Text="Welcome Back"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+					<!-- Username -->
+					<StackLayout>
+						<Label Text="Username" FontAttributes="Bold"/>
+						<Entry Text="{Binding Username}"
+                               Placeholder="Enter your username"
+                               BackgroundColor="#F5F5F5"/>
+					</StackLayout>
+
+					<!-- Password -->
+					<StackLayout>
+						<Label Text="Password" FontAttributes="Bold"/>
+						<Entry Text="{Binding Password}"
+                               Placeholder="Enter your password"
+                               IsPassword="True"
+                               BackgroundColor="#F5F5F5"/>
+					</StackLayout>
+
+					<!-- Error Message -->
+					<Label Text="{Binding ErrorMessage}"
+                           TextColor="Red"
+                           IsVisible="{Binding HasError}"
+                           HorizontalOptions="Center"/>
+
+					<!-- Login Button -->
+					<Button Text="Sign In"
+                            Command="{Binding LoginCommand}"
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"
+                            HeightRequest="50"
+                            CornerRadius="25"/>
+
+					<!-- Register Link -->
+					<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+						<Label Text="Don't have an account?"/>
+						<Label Text=" Sign Up"
+                               TextColor="#4CAF50"
+                               FontAttributes="Bold">
+							<Label.GestureRecognizers>
+								<TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}"/>
+							</Label.GestureRecognizers>
+						</Label>
+					</StackLayout>
+				</StackLayout>
+			</Border>
+		</StackLayout>
+	</ScrollView>
+</ContentPage>
