@@ -32,6 +32,14 @@ MHike is a cross-platform mobile application developed using .NET MAUI for manag
 - GPS integration
 - Photo uploads
 
+## 🎥 Demo Videos
+
+### Hybrid MHike App (Visual Studio) – Features & Improvements
+https://youtu.be/0vKlf9GWQho
+
+### MHike App (Android Studio) – Improved Layout Demonstration
+https://youtu.be/AiQnoYI22Ew
+
 ## Author
 
 Eusebius Ndege
